@@ -1,0 +1,35 @@
+
+<%= form_for :link, url: links_path do |f| %>
+  <h2>Add a New Link</h2>
+  <%= f.label :url %>
+  <%= f.text_field :url %>
+  <%= f.label :title %>
+  <%= f.text_field :title %>
+  <%= f.button 'Create New Link', class: 'btn-sm btn btn-default' %>
+<% end %>
+<br>
+
+
+<h3>My Links</h3>
+<table class="table">
+  <tr>
+    <th>Title<small>(<a href="#" class='sortTitle'>sort alphabetically</a>)</small></th>
+    <th>Url</th>
+    <th></th>
+    <th></th>
+    <th>Read?<a href="#" class='sortReadStatus'>sort</a></th>
+  </tr>
+  <% @links.each do |link| %>
+    <tr data-id='<%= link.id %>' data-title='<%= link.title %>' class='<%= link.read %> link'>
+      <td><%= link_to link.title %></td>
+      <td><%= link_to link.url %></td>
+      <td><%= link_to 'Edit', edit_link_path(link) %></td>
+      <td><%= link_to 'Delete', link_path(link), method: 'delete' %></td>
+      <% if link.read %>
+        <td><%= link_to 'Yes', '#', id: 'read' %></td>
+      <% else %>
+        <td><%= link_to 'No', '#', id: 'read' %></td>
+      <% end %>
+    </tr>
+  <% end %>
+</table>
