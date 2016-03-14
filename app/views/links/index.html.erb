@@ -1,4 +1,6 @@
-
+<% if current_user %>
+<%= link_to "Logout", logout_path, method: :delete %>
+<% end %>
 <%= form_for :link, url: links_path do |f| %>
   <h2>Add a New Link</h2>
   <%= f.label :url %>
